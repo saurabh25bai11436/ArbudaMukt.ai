@@ -46,6 +46,10 @@ from sklearn.tree import DecisionTreeClassifier
 # Assuming you have your features (X) and target (y) ready
 # If not, you'll need to load them (e.g., X = df.drop('target', axis=1))
 
+# Define features (X) and target (y)
+X = df.drop(['target', 'target_name'], axis=1) # Features are all columns except 'target' and 'target_name'
+y = df['target']                              # Target is the 'target' column
+
 # 1. DEFINE x_train and y_train (This is the missing piece!)
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -60,21 +64,21 @@ dt_model = DecisionTreeClassifier(
 )
 
 # 3. Train the model
-dt_model.fit(x_train, y_train) 
+dt_model.fit(x_train, y_train)
 
 print("Model trained successfully!")
 
 
 # Make predictions on test data
-y_pred = dt_model.predict(X_test)           # Predict classes for test set
-y_pred_train = dt_model.predict(X_train)    # Predict classes for training set
-y_pred_proba = dt_model.predict_proba(X_test)[:, 1]  # Get probability scores for ROC curve
+y_pred = dt_model.predict(x_test)           # Predict classes for test set
+y_pred_train = dt_model.predict(x_train)    # Predict classes for training set
+y_pred_proba = dt_model.predict_proba(x_test)[:, 1]  # Get probability scores for ROC curve
 
 
 # 1. Import the necessary function
 from sklearn.model_selection import cross_val_score
 # Cross-validation score
-cv_scores = cross_val_score(dt_model, X_train, y_train, cv=5)  # 5-fold cross-validation
+cv_scores = cross_val_score(dt_model, X, y, cv=5)  # 5-fold cross-validation, use full X, y
 print(f"\nCross-validation scores: {cv_scores}")  # Accuracy for each fold
 print(f"Mean CV Score: {cv_scores.mean():.3f} (+/- {cv_scores.std()*2:.3f})")  # Average performance
 
@@ -109,7 +113,7 @@ print(f"       Benign:      {cm[1,0]:3d}       {cm[1,1]:3d}")  # False Negatives
 
 
 plt.figure(figsize=(8, 6))                    # Create figure of size 8x6 inches
-sns.heatmap(cm, 
+sns.heatmap(cm,
             annot=True,                        # Show numbers in cells
             fmt='d',                            # Format as integers
             cmap='Blues',                        # Use blue color scheme
@@ -124,7 +128,7 @@ plt.show()                                        # Display the plot
 
 
 plt.figure(figsize=(20, 10))                     # Large figure for detailed tree
-plot_tree(dt_model, 
+plot_tree(dt_model,
           feature_names=cancer.feature_names,     # Label nodes with feature names
           class_names=cancer.target_names,        # Label with class names
           filled=True,                             # Color nodes by majority class
@@ -138,20 +142,20 @@ plt.show()
 def predict_cancer(features_dict):
     """
     Simple function to predict breast cancer for new samples
-    
+
     Parameters:
     features_dict: Dictionary with feature names and their values
-    
+
     Returns:
     Prediction and probability
     """
     # Create numpy array from input features in correct order
     input_features = np.array([features_dict[feature] for feature in cancer.feature_names]).reshape(1, -1)
-    
+
     # Make prediction
     prediction = dt_model.predict(input_features)[0]           # 0 or 1
     probability = dt_model.predict_proba(input_features)[0]    # Probability for each class
-    
+
     # Return results in easy-to-understand format
     result = {
         'prediction': cancer.target_names[prediction],         # 'malignant' or 'benign'
@@ -170,7 +174,7 @@ print("="*60)
 sample_idx = 0
 sample_features = {}
 for i, feature in enumerate(cancer.feature_names):
-    sample_features[feature] = X_test[sample_idx][i]  # Create dictionary of feature values
+    sample_features[feature] = x_test.iloc[sample_idx][i]  # Create dictionary of feature values
 
 print("Sample Features (first 5 only for brevity):")
 for feature in list(sample_features.keys())[:5]:
@@ -178,7 +182,7 @@ for feature in list(sample_features.keys())[:5]:
 
 # Get prediction for this sample
 result = predict_cancer(sample_features)
-print(f"\nActual Class: {cancer.target_names[y_test[sample_idx]]}")
+print(f"\nActual Class: {cancer.target_names[y_test.iloc[sample_idx]]}")
 print(f"Predicted Class: {result['prediction']}")
 print(f"Probability (Malignant): {result['probability_malignant']:.3f}")
 print(f"Probability (Benign): {result['probability_benign']:.3f}")
