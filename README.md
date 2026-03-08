@@ -83,3 +83,12 @@ docker-compose up --build
 Clinician UI: http://localhost:8501
 
 Interactive API Docs: http://localhost:8000/docs
+
+## Explainable AI (XAI) & Ethics
+Medical AI cannot be a "Black Box." ArbudaMukt incorporates three layers of interpretability:
+
+Visual (Grad-CAM): Highlights pixel-level attention on mammograms to confirm AI focus.
+
+Statistical (SHAP): Provides waterfall plots explaining which clinical feature (e.g., concave_points_mean) contributed most to a malignant diagnosis.
+
+Causal (Counterfactuals): Answers "What-If" scenarios for treatment planning (e.g., "How does survival change if we opt for BCS instead of Mastectomy?").
