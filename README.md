@@ -69,10 +69,11 @@ ArbudaMukt implements a **Multimodal Late Fusion** strategy. Unlike traditional 
 * Docker & Docker Compose
 
 ### Quick Start
-```bash
+
 # Clone the repository
+
 git clone [https://github.com/your-username/ArbudaMukt.ai.git](https://github.com/your-username/ArbudaMukt.ai.git)
-cd ArbudaMukt.ai
+cd ArbudaMuktai
 
 # Setup Environment
 cp .env.example .env
@@ -80,9 +81,13 @@ cp .env.example .env
 # Spin up the entire stack (API + Dashboard + DB)
 docker-compose up --build
 
+
+
 Clinician UI: http://localhost:8501
 
 Interactive API Docs: http://localhost:8000/docs
+
+
 
 ## Explainable AI (XAI) & Ethics
 Medical AI cannot be a "Black Box." ArbudaMukt incorporates three layers of interpretability:
