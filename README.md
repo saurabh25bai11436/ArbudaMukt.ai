@@ -79,13 +79,7 @@ cp .env.example .env
 
 # Spin up the entire stack (API + Dashboard + DB)
 docker-compose up --build
-Clinician UI: http://localhost:8501Interactive API Docs: http://localhost:8000/docs⚖️ Explainable AI (XAI) & EthicsMedical AI cannot be a "Black Box." ArbudaMukt incorporates three layers of interpretability:Visual (Grad-CAM): Highlights pixel-level attention on mammograms to confirm AI focus.Statistical (SHAP): Provides waterfall plots explaining which clinical feature (e.g., concave_points_mean) contributed most to a malignant diagnosis.Causal (Counterfactuals): Answers "What-If" scenarios for treatment planning (e.g., "How does survival change if we opt for BCS instead of Mastectomy?").📁 Directory StructurePlaintext├── 📁 datasets/              # Data Governance & Synthetic Sandboxes
-├── 📁 models/                
-│   ├── 📁 screening_img/     # YOLOv11/MONAI Vision models
-│   ├── 📁 diagnostic_tab/    # XGBoost/CatBoost Classifiers
-│   ├── 📁 treatment_cure/    # Response prediction models
-│   └── 📁 prognostic_surv/   # Survival Analysis (DeepSurv)
-├── 📁 web_app/               # FastAPI Backend & Streamlit Frontend
-├── 📁 xai/                   # Grad-CAM, SHAP, and Counterfactual logic
-└── 📁 federated_learning/    # Privacy-preserving multi-hospital training
-🧪 Clinical ValidationMetricScreening (AUC)Diagnosis (F1)Prognosis (C-Index)ArbudaMukt v2.00.9620.9780.844State-of-the-Art0.9200.9500.790Validation performed on UCI Wisconsin, CBIS-DDSM, and METABRIC datasets.🤝 Contributing & LicenseWe welcome contributions from Data Scientists, Oncologists, and Bio-statisticians. Please read CONTRIBUTING.md for our coding standards and docs/ETHICS.md for clinical safety guidelines.Licensed under the MIT License.ArbudaMukt.ai is not just a repository; it is a vision to democratize high-precision oncology tools globally.
+
+Clinician UI: http://localhost:8501
+
+Interactive API Docs: http://localhost:8000/docs
