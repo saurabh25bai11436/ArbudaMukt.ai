@@ -1,4 +1,4 @@
-# 🩺 ArbudaMukt.ai (अर्बुदमुक्त:)
+# 🩺 ArbudaMukt.ai (अर्बुद:मुक्त:)
 ### *A Unified Multimodal Framework for Breast Cancer Detection, Diagnosis, and Mitigation.*
 
 [![GitHub Stars](https://img.shields.io/github/stars/saurabh25bai11436/ArbudaMukt.ai?style=for-the-badge)](https://github.com/your-username/ArbudaMukt.ai/stargazers)
