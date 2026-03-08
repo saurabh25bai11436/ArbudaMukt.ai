@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  #  BACKEND: FastAPI AI Engine 
+  backend:
+    build:
+      context: ./web_app
+      dockerfile: Dockerfile
+    container_name: arbudamukt-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+      - ./datasets:/app/datasets
+    environment:
+      - MODEL_PATH=/app/models/diagnostic_tab/diagnostic_v1.pkl
+      - ENV=production
+    restart: always
+    networks:
+      - arbudamukt-net
+
+  #  FRONTEND: Streamlit Clinician Dashboard 
+  frontend:
+    build:
+      context: ./web_app
+      dockerfile: Dockerfile.frontend # Separate Dockerfile for UI if needed
+    container_name: arbudamukt-ui
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+    environment:
+      - BACKEND_URL=http://backend:8000
+    restart: always
+    networks:
+      - arbudamukt-net
+
+networks:
+  arbudamukt-net:
+    driver: bridge
