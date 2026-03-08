@@ -47,7 +47,13 @@ We are particularly interested in:
 
 ## 🧪 Testing Protocol
 Before submitting a PR, ensure your local environment matches our production stack:
-```bash
+
 # Run full suite via Docker
 docker-compose up --build
 pytest tests/
+
+
+## ⚖️ Clinical Disclaimer
+Contributions involving medical logic or diagnostic weights must be reviewed by the Clinical Oversight Committee. We prioritize patient safety and "Human-in-the-Loop" decision-making above all else.
+
+**Questions?** Reach out to the maintainers or open a "Discussion" thread on GitHub. Let's make the world ArbudaMukt!
